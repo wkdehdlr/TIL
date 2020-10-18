@@ -1,0 +1,4 @@
+- [reference](https://bkjeon1614.tistory.com/615)
+- build.gradle 추가
+    - implementation 'io.swagger:swagger-annotations:1.5.21'
+    - implementation 'io.swagger:swagger-models:1.5.21'
