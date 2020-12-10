@@ -19,3 +19,4 @@
 #### 프론트
 - [Vuejs 개발환경 세팅]()
 - [웹팩]()
+- [Intellij에서 Vue alias 사용하기](https://codinghack.tistory.com/40)
