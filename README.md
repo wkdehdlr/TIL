@@ -8,6 +8,7 @@
 - [Swagger java.lang.NumberFormatException:For input string](https://github.com/wkdehdlr/tips/blob/main/Swagger%20java.lang.NumberFormatException:For%20input%20string.md)
 - [컨트롤러에서 Collection 파라미터 검증](https://github.com/wkdehdlr/tips/blob/main/Controller%20Collection%20Param%20Validator.md)
 - [Spring Cloud Gateway]()
+- [슬라이싱 테스트]()
 
 #### 리눅스
 - [systemd]()
@@ -15,6 +16,8 @@
 #### 웹
 - [GSLB]()
 - [L4]()
+- [VIP]()
+- [SSL]()
 
 #### 프론트
 - [Vuejs 개발환경 세팅]()
