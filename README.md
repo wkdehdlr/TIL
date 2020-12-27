@@ -12,14 +12,22 @@
 
 #### 리눅스
 - [systemd]()
+- [/etc/hosts와 /etc/resolv.conf](https://github.com/wkdehdlr/tips/blob/main/hosts%EC%99%80%20resolv.conf.md)
 
 #### 웹
-- [GSLB]()
+- [GSLB](https://github.com/wkdehdlr/tips/blob/main/GSLB.md)
 - [L4]()
 - [VIP]()
 - [SSL]()
+- [DNS](https://github.com/wkdehdlr/tips/blob/main/DNS.md)
+- [모든 개발자를 위한 HTTP 웹 기본 지식]()
+
+#### DevOps
+- [AWS CodeBuild]()
+- [AWS CodeDeploy]()
+- [AWS ELB]()
 
 #### 프론트
-- [Vuejs 개발환경 세팅]()
-- [웹팩]()
+- [Vuejs 개발환경 세팅](https://github.com/wkdehdlr/tips/blob/main/Vuejs%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%20%EC%84%B8%ED%8C%85.md)
+- [웹팩](https://github.com/wkdehdlr/tips/blob/main/%EC%9B%B9%ED%8C%A9.md)
 - [Intellij에서 Vue alias 사용하기](https://codinghack.tistory.com/40)

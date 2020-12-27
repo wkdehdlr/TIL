@@ -4,22 +4,24 @@
     - vue-cli 3버전 이상에서는 package.json에 자동으로 eslint를 추가해준다
         - 이전 버전에서는 자동으로 eslint옵션을 추가하지않아서 package.json과 같은 위치에 `.eslintrs.js`를 추가해야했다
     - rules에 원하는 규칙을 추가한다
-<br>
+<br><br>
 - router
     - [중첩 라우트](https://router.vuejs.org/kr/guide/essentials/nested-routes.html)
-        ```javascript
-        const routes = [
-          {
-              path:'/aaa',component: A,
-              children: [
-                {
-                    path:'bbb',component: B
-                }
-              ]  
-          } 
-        ] 
-        ```
+        
+    ```javascript
+    const routes = [
+      {
+          path:'/aaa',component: A,
+          children: [
+            {
+                path:'bbb',component: B
+            }
+          ]  
+      } 
+    ] 
+    ```
+      
     - localhost:8080/aaa -> A 컴포넌트 렌더링
     - localhost:8080/aaa/bbb -> B 컴포넌트 렌더링
-    - 이게 가능하려면 A 컴포넌트안에 <router-view />가 있어야한다. 부모 컴포넌트에 <router-view />가 없으면 routes에서 설정하더라도 localhost:8080/aaa/bbb -> A 컴포넌트로 이동한다
+    - 이게 가능하려면 A 컴포넌트안에 `<router-view />`가 있어야한다. 부모 컴포넌트에 `<router-view />`가 없으면 routes에서 설정하더라도 localhost:8080/aaa/bbb -> A 컴포넌트로 이동한다
   
