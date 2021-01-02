@@ -24,7 +24,7 @@
 - [모든 개발자를 위한 HTTP 웹 기본 지식]()
 
 #### DevOps
-- [AWS CodeBuild]()
+- [AWS CodeBuild](https://github.com/wkdehdlr/TIL/blob/main/AWS%20CodeBuild.md)
 - [AWS CodeDeploy]()
 - [AWS ELB]()
 
