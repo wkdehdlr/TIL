@@ -16,6 +16,8 @@
 - [Serializable](https://github.com/wkdehdlr/TIL/blob/main/Serializable.md)
 
 #### 리눅스
+- [bash shell]()
+- [curl]()
 - [systemd]()
 - [service]()
 - [logrotate]()
@@ -39,3 +41,6 @@
 - [Vuejs 개발환경 세팅](https://github.com/wkdehdlr/tips/blob/main/Vuejs%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%20%EC%84%B8%ED%8C%85.md)
 - [웹팩](https://github.com/wkdehdlr/tips/blob/main/%EC%9B%B9%ED%8C%A9.md)
 - [Intellij에서 Vue alias 사용하기](https://codinghack.tistory.com/40)
+
+### ETC
+- [mac c++세팅]()
