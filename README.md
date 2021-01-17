@@ -30,6 +30,7 @@
 - [SSL]()
 - [DNS](https://github.com/wkdehdlr/tips/blob/main/DNS.md)
 - [모든 개발자를 위한 HTTP 웹 기본 지식]()
+- [nginx]()
 
 #### DevOps
 - [AWS CodeBuild](https://github.com/wkdehdlr/TIL/blob/main/AWS%20CodeBuild.md)
@@ -39,8 +40,9 @@
 
 #### 프론트
 - [Vuejs 개발환경 세팅](https://github.com/wkdehdlr/tips/blob/main/Vuejs%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%20%EC%84%B8%ED%8C%85.md)
+- [vue.config.js](https://github.com/wkdehdlr/TIL/blob/main/vue.config.js.md)
 - [웹팩](https://github.com/wkdehdlr/tips/blob/main/%EC%9B%B9%ED%8C%A9.md)
 - [Intellij에서 Vue alias 사용하기](https://codinghack.tistory.com/40)
 
 ### ETC
-- [mac c++세팅]()
+- [mac c++세팅](https://github.com/wkdehdlr/TIL/blob/main/mac%20c%2B%2B%EC%84%B8%ED%8C%85.md)
