@@ -16,7 +16,7 @@
 - [Serializable](https://github.com/wkdehdlr/TIL/blob/main/Serializable.md)
 
 #### 리눅스
-- [bash shell]()
+- [shell script](https://github.com/wkdehdlr/TIL/blob/main/shell%20script.md)
 - [curl]()
 - [systemd]()
 - [service]()
