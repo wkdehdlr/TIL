@@ -22,6 +22,7 @@
 - [service]()
 - [logrotate]()
 - [/etc/hosts와 /etc/resolv.conf](https://github.com/wkdehdlr/tips/blob/main/hosts%EC%99%80%20resolv.conf.md)
+- [출력버리기]()
 
 #### 웹
 - [GSLB](https://github.com/wkdehdlr/tips/blob/main/GSLB.md)
