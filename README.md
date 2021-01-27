@@ -17,12 +17,13 @@
 
 #### 리눅스
 - [shell script](https://github.com/wkdehdlr/TIL/blob/main/shell%20script.md)
-- [curl]()
+- [curl](https://github.com/wkdehdlr/TIL/blob/main/curl.md)
 - [systemd]()
 - [service]()
 - [logrotate]()
 - [/etc/hosts와 /etc/resolv.conf](https://github.com/wkdehdlr/tips/blob/main/hosts%EC%99%80%20resolv.conf.md)
-- [출력버리기]()
+- [출력버리기](https://github.com/wkdehdlr/TIL/blob/main/%EC%B6%9C%EB%A0%A5%EB%B2%84%EB%A6%AC%EA%B8%B0.md)
+- [nohup]()
 
 #### 웹
 - [GSLB](https://github.com/wkdehdlr/tips/blob/main/GSLB.md)
