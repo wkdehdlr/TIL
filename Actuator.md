@@ -29,7 +29,7 @@
 <br><br>
 ## Endpoint 노출
 - endpoint를 `disabled`하면 application context 전체에서 삭제된다. 따라서 `노출여부`만 설정하고 싶다면 `include, exclude` 속성을 사용
-- 활성화와 노출은 별개로 간다!
+- 활성화(`enable`)와 노출(`exposure`)은 별개로 간다!
 - [default endpoint exposure](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints-exposing-endpoints)
 - 모든 endpoint 노출
     ```yaml
@@ -41,7 +41,7 @@
     ```
 <br><br>
 ## Endpoint Path 재설정
-- base-path(ex> `/actuator` -> `/manage`)
+- base-path (ex> `/actuator` -> `/manage`)
     ```yaml
     management:
       endpoints:
@@ -49,7 +49,7 @@
           base-path: "/manage"
     ```
   <br>
-- endpoint(ex> `/actuator/health` -> `/healthcheck` )
+- endpoint (ex> `/actuator/health` -> `/healthcheck` )
     ```yaml
     management:
       endpoints:
@@ -61,10 +61,12 @@
 <br><br>
 ## 서버포트 재설정
 - management 서버포트
+- address를 "127.0.0.1"로 지정하면 8081 actuator endpoint에 localhost로 접근할때만 가능
     ```yaml
     management:
       server:
         port: 8081
+        address: "127.0.0.1"
     ```
 <br><br>
 ## 사용자정의 HealthIndicator
@@ -137,3 +139,25 @@
         }
     }
     ```
+  - `Controller`를 통한 healthcheck: localhost:8080/monitor/l7check
+  - `actuator`를 통한 healthcheck: localhost:8081/healthcheck
+<br><br>
+## 보안
+> endpoints에는 민감한 정보가 있기에 보호되어야한다.
+```java
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests((requests) ->
+        requests.anyRequest().hasRole("ENDPOINT_ADMIN"));
+    http.httpBasic();
+    return http.build();
+}
+```
+<br><br>
+## 레퍼런스
+- [reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready)
+- [reference](https://forward.nhn.com/2020/seoul/hands-on-labs/java.spring-boot-actuator/01-ready.html)
+- [reference](https://velog.io/@neptunes032/Spring-Boot-Actuator-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EA%B8%B0)
+- [reference](https://twofootdog.tistory.com/22)
+- [reference](https://silvernine.me/wp/?p=1072)
+- [reference](https://devday.tistory.com/m/3576?category=609812)

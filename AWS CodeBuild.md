@@ -1,6 +1,6 @@
 # AWS CodeBuild
 보통 CI(Continuous Integration)관리를 위하여 빌드서버를 따로 관리한다.
-(예를 들어 빌드용 서버에 젠킨스를 설치해서 사용)
+(예를 들어 빌드용 서버에 젠킨스를 설치해서 사용)<br>
 AWS CodeBuild를 통해 별도 서버구성 없이 CI를 진행할 수 있다.
 ![AWS CodeBuild](./img/screenshot202101022308.png)
 > `github`에서 소스를 가져와서 `AWS CodeBuild`를 통해 빌드하고 생성한 zip파일을 `AWS S3`에 올리기까지 진행해본다.
