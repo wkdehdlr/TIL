@@ -18,13 +18,13 @@
 #### 테스트
 - [테스트](https://github.com/wkdehdlr/TIL/blob/main/%ED%85%8C%EC%8A%A4%ED%8A%B8.md)
 - [Mock이란?](https://github.com/wkdehdlr/tips/blob/main/Mock%EC%9D%B4%EB%9E%80%3F.md)
-- [@WebMvcTest & @SpringBootTest]()
+- [@WebMvcTest & @SpringBootTest](https://github.com/wkdehdlr/TIL/blob/main/%40WebMvcTest%20%26%20%40SpringBootTest.md)
 
 #### 리눅스
 - [shell script](https://github.com/wkdehdlr/TIL/blob/main/shell%20script.md)
 - [curl](https://github.com/wkdehdlr/TIL/blob/main/curl.md)
-- [systemd]()
-- [service]()
+- [service 등록하기]()
+- [systemctl](https://github.com/wkdehdlr/TIL/blob/main/systemctl.md)
 - [logrotate]()
 - [/etc/hosts와 /etc/resolv.conf](https://github.com/wkdehdlr/tips/blob/main/hosts%EC%99%80%20resolv.conf.md)
 - [출력버리기](https://github.com/wkdehdlr/TIL/blob/main/%EC%B6%9C%EB%A0%A5%EB%B2%84%EB%A6%AC%EA%B8%B0.md)
@@ -37,7 +37,7 @@
 - [SSL]()
 - [DNS](https://github.com/wkdehdlr/tips/blob/main/DNS.md)
 - [모든 개발자를 위한 HTTP 웹 기본 지식]()
-- [nginx]()
+- [nginx](https://github.com/wkdehdlr/TIL/blob/main/nginx.md)
 - [XSS CSRF](https://github.com/wkdehdlr/TIL/blob/main/XSS%20CSRF.md)
 
 #### DevOps
