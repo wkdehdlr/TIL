@@ -7,9 +7,7 @@
 - [Swagger Annotation](https://github.com/wkdehdlr/tips/blob/main/Swagger%20Annotation.md)
 - [Swagger java.lang.NumberFormatException:For input string](https://github.com/wkdehdlr/tips/blob/main/Swagger%20java.lang.NumberFormatException:For%20input%20string.md)
 - [컨트롤러에서 Collection 파라미터 검증](https://github.com/wkdehdlr/tips/blob/main/Controller%20Collection%20Param%20Validator.md)
-- [Spring Cloud Gateway]()
-- [Object Mapper]()
-- [logback]()
+- [Spring RabbitMQ](https://github.com/wkdehdlr/TIL/blob/main/Spring%20RabbitMQ.md)
 
 #### JPA
 - [JPA Fetch Join ToOne 관계는 여러번 가능, ToMany는 한번만 가능](https://github.com/wkdehdlr/tips/blob/main/JPA%20Fetch%20Join%20ToOne%20%EA%B4%80%EA%B3%84%EB%8A%94%20%EC%97%AC%EB%9F%AC%EB%B2%88%EA%B0%80%EB%8A%A5%2C%20ToMany%EB%8A%94%20%ED%95%9C%EB%B2%88%EB%A7%8C%20%EA%B0%80%EB%8A%A5.md)
@@ -20,25 +18,23 @@
 - [Mock이란?](https://github.com/wkdehdlr/tips/blob/main/Mock%EC%9D%B4%EB%9E%80%3F.md)
 - [@WebMvcTest & @SpringBootTest](https://github.com/wkdehdlr/TIL/blob/main/%40WebMvcTest%20%26%20%40SpringBootTest.md)
 
+#### 객체지향
+- [객체지향의 사실과 오해](https://github.com/wkdehdlr/TIL/blob/main/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%9D%98%20%EC%82%AC%EC%8B%A4%EA%B3%BC%20%EC%98%A4%ED%95%B4.md)
+
 #### 리눅스
 - [shell script](https://github.com/wkdehdlr/TIL/blob/main/shell%20script.md)
 - [curl](https://github.com/wkdehdlr/TIL/blob/main/curl.md)
 - [service 등록하기]()
 - [systemctl](https://github.com/wkdehdlr/TIL/blob/main/systemctl.md)
-- [logrotate]()
+- [logrotate](https://github.com/wkdehdlr/TIL/blob/main/logrotate.md)
 - [/etc/hosts와 /etc/resolv.conf](https://github.com/wkdehdlr/tips/blob/main/hosts%EC%99%80%20resolv.conf.md)
 - [출력버리기](https://github.com/wkdehdlr/TIL/blob/main/%EC%B6%9C%EB%A0%A5%EB%B2%84%EB%A6%AC%EA%B8%B0.md)
-- [nohup]()
+- [nohup](https://github.com/wkdehdlr/TIL/blob/main/nohub.md)
 
 #### 웹
 - [GSLB](https://github.com/wkdehdlr/tips/blob/main/GSLB.md)
-- [L4]()
-- [VIP]()
-- [SSL]()
 - [DNS](https://github.com/wkdehdlr/tips/blob/main/DNS.md)
-- [모든 개발자를 위한 HTTP 웹 기본 지식]()
 - [nginx](https://github.com/wkdehdlr/TIL/blob/main/nginx.md)
-- [XSS CSRF](https://github.com/wkdehdlr/TIL/blob/main/XSS%20CSRF.md)
 
 #### DevOps
 - [AWS CodeBuild](https://github.com/wkdehdlr/TIL/blob/main/AWS%20CodeBuild.md)
