@@ -17,6 +17,7 @@
 - [테스트](https://github.com/wkdehdlr/TIL/blob/main/%ED%85%8C%EC%8A%A4%ED%8A%B8.md)
 - [Mock이란?](https://github.com/wkdehdlr/tips/blob/main/Mock%EC%9D%B4%EB%9E%80%3F.md)
 - [@WebMvcTest & @SpringBootTest](https://github.com/wkdehdlr/TIL/blob/main/%40WebMvcTest%20%26%20%40SpringBootTest.md)
+- [Artillery를 사용한 Stress Test](https://github.com/wkdehdlr/TIL/blob/main/Artillery%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%9C%20Stress%20Test.md)
 
 #### 객체지향
 - [객체지향의 사실과 오해](https://github.com/wkdehdlr/TIL/blob/main/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%9D%98%20%EC%82%AC%EC%8B%A4%EA%B3%BC%20%EC%98%A4%ED%95%B4.md)
@@ -41,6 +42,7 @@
 - [AWS CodeDeploy](https://github.com/wkdehdlr/TIL/blob/main/AWS%20CodeDeploy.md)
 - [AWS EC2 세팅](https://github.com/wkdehdlr/TIL/blob/main/AWS%20EC2%20%EC%84%B8%ED%8C%85.md)
 - [AWS ELB]()
+- [EC2 Permission Denied](https://github.com/wkdehdlr/TIL/blob/main/EC2%20Permission%20Denied.md)
 
 #### 프론트
 - [Vuejs 개발환경 세팅](https://github.com/wkdehdlr/tips/blob/main/Vuejs%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%20%EC%84%B8%ED%8C%85.md)
