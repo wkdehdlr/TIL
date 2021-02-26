@@ -8,6 +8,7 @@
 - [Swagger java.lang.NumberFormatException:For input string](https://github.com/wkdehdlr/tips/blob/main/Swagger%20java.lang.NumberFormatException:For%20input%20string.md)
 - [컨트롤러에서 Collection 파라미터 검증](https://github.com/wkdehdlr/tips/blob/main/Controller%20Collection%20Param%20Validator.md)
 - [Spring RabbitMQ](https://github.com/wkdehdlr/TIL/blob/main/Spring%20RabbitMQ.md)
+- [더 자바, 코드를 조작하는 다양한 방법](https://github.com/wkdehdlr/TIL/blob/main/%EB%8D%94%20%EC%9E%90%EB%B0%94%2C%20%EC%BD%94%EB%93%9C%EB%A5%BC%20%EC%A1%B0%EC%9E%91%ED%95%98%EB%8A%94%20%EB%8B%A4%EC%96%91%ED%95%9C%20%EB%B0%A9%EB%B2%95.md)
 
 #### JPA
 - [JPA Fetch Join ToOne 관계는 여러번 가능, ToMany는 한번만 가능](https://github.com/wkdehdlr/tips/blob/main/JPA%20Fetch%20Join%20ToOne%20%EA%B4%80%EA%B3%84%EB%8A%94%20%EC%97%AC%EB%9F%AC%EB%B2%88%EA%B0%80%EB%8A%A5%2C%20ToMany%EB%8A%94%20%ED%95%9C%EB%B2%88%EB%A7%8C%20%EA%B0%80%EB%8A%A5.md)
