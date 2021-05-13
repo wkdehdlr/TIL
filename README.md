@@ -48,6 +48,7 @@
 - [AWS EC2 세팅](https://github.com/wkdehdlr/TIL/blob/main/AWS%20EC2%20%EC%84%B8%ED%8C%85.md)
 - [AWS ELB]()
 - [EC2 Permission Denied](https://github.com/wkdehdlr/TIL/blob/main/EC2%20Permission%20Denied.md)
+- [k8s](https://github.com/wkdehdlr/TIL/blob/main/k8s.md)
 
 #### 프론트
 - [Vuejs 개발환경 세팅](https://github.com/wkdehdlr/tips/blob/main/Vuejs%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%20%EC%84%B8%ED%8C%85.md)
