@@ -13,6 +13,7 @@
 - [Scanner Mocking 하기](https://github.com/wkdehdlr/TIL/blob/main/Scanner%20Mocking%20%ED%95%98%EA%B8%B0.md)
 - [Class 타입](https://github.com/wkdehdlr/TIL/blob/main/Class%20%ED%83%80%EC%9E%85.md)
 - [Spring Boot Configuration Annotation Processor not found in classpath](https://github.com/wkdehdlr/TIL/blob/main/Spring%20Boot%20Configuration%20Annotation%20Processor%20not%20found%20in%20classpath.md)
+- [스프링부트 로그]()
 
 #### JPA
 - [JPA Fetch Join ToOne 관계는 여러번 가능, ToMany는 한번만 가능](https://github.com/wkdehdlr/tips/blob/main/JPA%20Fetch%20Join%20ToOne%20%EA%B4%80%EA%B3%84%EB%8A%94%20%EC%97%AC%EB%9F%AC%EB%B2%88%EA%B0%80%EB%8A%A5%2C%20ToMany%EB%8A%94%20%ED%95%9C%EB%B2%88%EB%A7%8C%20%EA%B0%80%EB%8A%A5.md)
@@ -50,7 +51,7 @@
 - [AWS ELB]()
 - [EC2 Permission Denied](https://github.com/wkdehdlr/TIL/blob/main/EC2%20Permission%20Denied.md)
 - [k8s](https://github.com/wkdehdlr/TIL/blob/main/k8s.md)
-- [젠킨스 유저 API 토큰 사용]()
+- [젠킨스 유저 API 토큰 사용](https://github.com/wkdehdlr/TIL/blob/main/%EC%A0%A0%ED%82%A8%EC%8A%A4%20%EC%9C%A0%EC%A0%80%20API%20%ED%86%A0%ED%81%B0%20%EC%82%AC%EC%9A%A9.md)
 
 #### 프론트
 - [Vuejs 개발환경 세팅](https://github.com/wkdehdlr/tips/blob/main/Vuejs%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%20%EC%84%B8%ED%8C%85.md)
