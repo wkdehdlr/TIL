@@ -62,3 +62,4 @@
 ### ETC
 - [mac c++세팅](https://github.com/wkdehdlr/TIL/blob/main/mac%20c%2B%2B%EC%84%B8%ED%8C%85.md)
 - [mac alias](https://github.com/wkdehdlr/TIL/blob/main/mac%20alias.md)
+- [intellij 디버깅](https://github.com/wkdehdlr/TIL/blob/main/intellij%20%EB%94%94%EB%B2%84%EA%B9%85.md)
