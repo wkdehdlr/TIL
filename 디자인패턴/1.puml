@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface DiscountStrategy {
++ getDiscountPrice(item: Item) : int
+}
+class Calculator {
++ calculate(items : List<Item>) : int
+}
+class FirstGuestDiscountStrategy {
++ getDiscountPrice(item: Item) : int
+}
+class NonFreshItemDiscountStrategy {
++ getDiscountPrice(item: Item) : int
+}
+
+DiscountStrategy <|-- FirstGuestDiscountStrategy
+DiscountStrategy <|-- NonFreshItemDiscountStrategy
+Calculator ..> DiscountStrategy
+
+@enduml
