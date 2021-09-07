@@ -13,6 +13,7 @@
 - [Scanner Mocking 하기](https://github.com/wkdehdlr/TIL/blob/main/Scanner%20Mocking%20%ED%95%98%EA%B8%B0.md)
 - [Class 타입](https://github.com/wkdehdlr/TIL/blob/main/Class%20%ED%83%80%EC%9E%85.md)
 - [Spring Boot Configuration Annotation Processor not found in classpath](https://github.com/wkdehdlr/TIL/blob/main/Spring%20Boot%20Configuration%20Annotation%20Processor%20not%20found%20in%20classpath.md)
+- [이펙티브자바](https://github.com/wkdehdlr/TIL/blob/main/%EC%9D%B4%ED%8E%99%ED%8B%B0%EB%B8%8C%EC%9E%90%EB%B0%94/2%EC%9E%A5(%EA%B0%9D%EC%B2%B4%20%EC%83%9D%EC%84%B1%EA%B3%BC%20%ED%8C%8C%EA%B4%B4).md)
 - [스프링부트 로그]()
 
 #### JPA
