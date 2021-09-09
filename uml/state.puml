@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface State {
++ increaseCoin(coin : int, vm : VendingMachine)
++ select(productId : int, vm : VendingMachine)
+}
+class VendingMachine {
+- state : State
++ insertCoin(coin : int)
++ select(productId : int)
++ changeState(state : State)
+}
+class NoCoinState {
+}
+class SelectableState {
+}
+class SoldoutState {
+}
+
+State <|-- NoCoinState
+State <|-- SelectableState
+State <|-- SoldoutState
+VendingMachine ..> State
+
+@enduml
