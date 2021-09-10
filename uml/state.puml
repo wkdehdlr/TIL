@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-interface State {
+interface State<<interface>> {
 + increaseCoin(coin : int, vm : VendingMachine)
 + select(productId : int, vm : VendingMachine)
 }
