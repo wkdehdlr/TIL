@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class FileOut {
++ write()
+}
+class BufferedOut {
++ write()
+}
+class ZipOut {
++ write()
+}
+class EncryptionOut {
+}
+
+class BufferEncOut {
+}
+class BufferZipOut {
+}
+class EncZipOut {
+}
+
+
+FileOut <|-- BufferedOut
+FileOut <|-- ZipOut
+FileOut <|-- EncryptionOut
+
+BufferedOut <|-- BufferEncOut
+EncryptionOut <|-- BufferEncOut
+
+BufferedOut <|-- BufferZipOut
+ZipOut <|-- BufferZipOut
+
+EncryptionOut <|-- EncZipOut
+ZipOut <|-- EncZipOut
+
+
+@enduml

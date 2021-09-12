@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface FileOut<<interface>> {
++ write()
+}
+class Client {
+}
+class Decorator {
+- delegate: FileOut
+# doDelegate()
+}
+class FileOutImpl {
+}
+class BufferedOut {
++ write()
+}
+class ZipOut {
++ write()
+}
+class EncryptionOut {
++ write()
+}
+
+Client ..> FileOut
+FileOut <|.. Decorator
+FileOut <|.. FileOutImpl
+Decorator <|-- BufferedOut
+Decorator <|-- ZipOut
+Decorator <|-- EncryptionOut
+@enduml

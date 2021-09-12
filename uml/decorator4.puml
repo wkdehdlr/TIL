@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant Client
+participant "EncryptionOut" as fileOut <<fileOut>>
+participant "FileOutImpl" as delegate <<delegate>>
+
+Client -> fileOut : 1. write(data)
+activate fileOut #FFBBBB
+
+fileOut -> fileOut: 1.1 encrypt(data)
+activate fileOut #DarkSalmon
+deactivate fileOut
+
+fileOut -> fileOut: 1.2 doDelegate(encryptedData)
+activate fileOut #DarkSalmon
+fileOut -> delegate: 1.2.1 write(encryptedData)
+activate delegate #FFBBBB
+deactivate delegate
+deactivate fileOut
+
+
+@enduml
