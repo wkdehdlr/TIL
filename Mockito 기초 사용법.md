@@ -72,7 +72,7 @@ public class AnyMatcherTest {
     }
 }
 ```
-|타입|설명|
+|메소드|설명|
 |---|---|
 |anyInt(), anyShort(), anyLong(), anyByte(), anyChar()<br> anyDouble(), anyFloat(), anyBoolean()|기본 데이터 타입에 대한 임의 값 일치|
 |anyString()|문자열에 대한 임의 값 일치|
@@ -80,3 +80,65 @@ public class AnyMatcherTest {
 |anyList(), anySet(), anyMap(), anyCollection()|임의의 콜렉션에 대한 일치|
 |matches(String), matches(Pattern)|정규표현식을 이용한 String 값 일치 여부|
 |eq(값)|특정 값과 일치 여부|
+### 주의
+> 인자가 두 개 이상인 경우
+```java
+// 기존
+List<String> mockLIst = mock(List.class);
+given(mockList.set(anyInt(), "123")).willReturn("456");
+String old = mockList.set(5, "123");
+```
+- 위 코드는 익셉션 발생
+- Mockito는 한 인자라도 ArgumentMatcher를 사용해서 설정한 경우 모든 인자를 ArgumentMatcher를 이용해서 설정
+```java
+// 수정
+List<String> mockLIst = mock(List.class);
+given(mockList.set(anyInt(), eq("123"))).willReturn("456");
+String old = mockList.set(5, "123");
+```
+- ArgumentMatchers.eq() 사용
+## 행위 검증
+> 모의 객체 역할 중 하나는 실제로 모의 객체가 불렸는지 검증하는 것
+```java
+public class GameTest {
+    
+    @Test
+    void init() {
+        GameNumGen genMock = mock(GameNumGen.class);
+        Game game = new Game(genMock);
+        game.init(GameLevel.EASY);
+        
+        BDDMockito.then(genMock).should().generate(GameLevel.EASY);
+        BDDMockito.then(genMock).should().generate(any());
+        BDDMockito.then(genMock).should(only()).generate(any());
+    }
+}
+```
+|메소드|설명|
+|---|---|
+|only()|한 번만 호출|
+|times(int)|지정한 횟수만큼 호출|
+|never()|호출하지 않음|
+|atLeast(int)|적어도 지정한 횟수만큼 호출|
+|atLeastOnce()|atLeast(1)과 동일|
+|atMost(int)|최대 지정한 횟수만큼 호출|
+## 인자 캡처
+> 모의 객체를 호출할 때 사용한 인자를 검증해야 할 때
+```java
+public class UserRegisterMockTest {
+    private UserRegister userRegister;
+    private EmailNotifier mockEmailNotifier = mock(EmailNotifier.class);
+    
+    @Test
+    void whenRegisterThenSendMail() {
+        userRegister.register("id", "pw", "email@email.com");
+        
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        BDDMockito.then(mockEmailNotifier)
+                    .should().sendRegisterEmail(captor.capture());
+        
+        String realEmail = captor.getValue();
+        assertEquals("email@email.com", realEmail);
+    }
+}
+```
