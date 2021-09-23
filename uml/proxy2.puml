@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ListUI
+
+activate ListUI #FFBBBB
+
+ListUI -> ProxyImage : 1. draw()
+activate ProxyImage #FFBBBB
+alt#Gold #LightBlue image == null
+    ProxyImage -> RealImage: 1.1 객체 생성
+end
+ProxyImage -> RealImage: 1.2 draw()
+activate RealImage #FFBBBB
+deactivate RealImage
+deactivate ProxyImage
+
+ListUI -> ProxyImage : 2. 두 번째 draw()
+activate ProxyImage #FFBBBB
+ProxyImage -> RealImage: 1.2 draw()
+activate RealImage #FFBBBB
+deactivate ProxyImage
+deactivate RealImage
+@enduml
