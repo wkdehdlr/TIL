@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface SearchService<<interface>> {
++ search(keyword : String) : SearchResult
+}
+class WebSearchRequestHandler {
+}
+class SearchServiceTolrAdapter {
+- tolrClient : TolrClient
++ search()
+}
+class TolrClient {
++ query()
+}
+
+WebSearchRequestHandler --> SearchService
+SearchService <|.. SearchServiceTolrAdapter
+SearchServiceTolrAdapter --|> TolrClient
+
+@enduml

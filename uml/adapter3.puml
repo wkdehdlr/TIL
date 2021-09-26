@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package "slf4j-api" {
+    interface Logger
+}
+
+package "slf4j-log4j" {
+    Logger <|.. qwe
+
+}
+package "log4j" {
+
+}
+
+@enduml
