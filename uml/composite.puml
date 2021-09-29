@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Device<<interface>> {
++ turnOn()
++ turnOff()
+}
+
+class DeviceGroup {
+- devices : List<Device>
++ turnAllOn()
++ turnAllOff()
+}
+
+Device <|.. Aircon
+Device <|.. Light
+Device <|.. Elevator
+
+DeviceGroup o.. Device
+DeviceGroup ..> Device
+
+@enduml
