@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class EmpReportDaoFacade<<Facade>> {
++ getEmpReportData()
+}
+
+GUIViewer ..> EmpReportDaoFacade
+XMLExporter ..> EmpReportDaoFacade
+ExcelExporter ..> EmpReportDaoFacade
+
+EmpReportDaoFacade ..> EmpDao
+EmpReportDaoFacade ..> ResumeDao
+EmpReportDaoFacade ..> EvaluationDao
+
+
+@enduml

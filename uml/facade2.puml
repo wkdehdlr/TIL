@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class GUIViewer
+class XMLExporter
+class ExcelExporter
+
+GUIViewer ..> EmpDao
+GUIViewer ..> ResumeDao
+GUIViewer ..> EvaluationDao
+
+XMLExporter ..> EmpDao
+XMLExporter ..> ResumeDao
+XMLExporter ..> EvaluationDao
+
+ExcelExporter ..> EmpDao
+ExcelExporter ..> ResumeDao
+ExcelExporter ..> EvaluationDao
+
+@enduml

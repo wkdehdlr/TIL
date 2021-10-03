@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class GUIViewer
+
+GUIViewer ..> EmpDao
+GUIViewer ..> ResumeDao
+GUIViewer ..> EvaluationDao
+
+@enduml
