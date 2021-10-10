@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class StatusChecker {
+- emailSender : EmailSender
++ check()
+}
+
+class EmailSender {
++sendEmail()
+}
+
+StatusChecker <-- EmailSender
+
+@enduml

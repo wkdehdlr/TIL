@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class StatusSubject {
++ add(observer : StatusObserver)
++ remove(observer : StatusObserver)
++ notifyStatus()
+}
+
+class StatusChecker {
+}
+
+interface StatusObserver<<interface>>{
++ onAbnormalStatus()
+}
+class EmailSender {
++ onAbnormalStatus()
+}
+class SmsSender {
++ onAbnormalStatus()
+}
+class MessengerSender {
++ onAbnormalStatus()
+}
+
+StatusSubject <|-- StatusChecker
+
+StatusSubject o-- StatusObserver
+StatusSubject --> StatusObserver
+
+StatusObserver <|-- EmailSender
+StatusObserver <|-- SmsSender
+StatusObserver <|-- MessengerSender
+
+@enduml
