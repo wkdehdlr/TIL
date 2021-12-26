@@ -48,6 +48,7 @@
 - [GSLB](https://github.com/wkdehdlr/tips/blob/main/GSLB.md)
 - [DNS](https://github.com/wkdehdlr/tips/blob/main/DNS.md)
 - [nginx](https://github.com/wkdehdlr/TIL/blob/main/nginx.md)
+- [모든 개발자를 위한 HTTP 웹 기본 지식](https://github.com/wkdehdlr/TIL/blob/main/%EB%AA%A8%EB%93%A0%20%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC%20%EC%9C%84%ED%95%9C%20HTTP%20%EC%9B%B9%20%EA%B8%B0%EB%B3%B8%20%EC%A7%80%EC%8B%9D.md)
 
 #### DevOps
 - [AWS CodeBuild](https://github.com/wkdehdlr/TIL/blob/main/AWS%20CodeBuild.md)
