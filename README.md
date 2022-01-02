@@ -31,7 +31,6 @@
 
 #### 객체지향
 - [NEXTSTEP]()
-- [객체지향의 사실과 오해](https://github.com/wkdehdlr/TIL/blob/main/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%9D%98%20%EC%82%AC%EC%8B%A4%EA%B3%BC%20%EC%98%A4%ED%95%B4.md)
 - [개발자가 반드시 정복해야 할 객체지향과 디자인패턴](https://github.com/wkdehdlr/TIL/blob/main/%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80%20%EB%B0%98%EB%93%9C%EC%8B%9C%20%EC%A0%95%EB%B3%B5%ED%95%B4%EC%95%BC%20%ED%95%A0%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EA%B3%BC%20%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4.md)
 
 #### 리눅스
@@ -43,6 +42,7 @@
 - [/etc/hosts와 /etc/resolv.conf](https://github.com/wkdehdlr/tips/blob/main/hosts%EC%99%80%20resolv.conf.md)
 - [출력버리기](https://github.com/wkdehdlr/TIL/blob/main/%EC%B6%9C%EB%A0%A5%EB%B2%84%EB%A6%AC%EA%B8%B0.md)
 - [nohup](https://github.com/wkdehdlr/TIL/blob/main/nohub.md)
+- [리눅스 명령어 & 쉘 스크립트](https://github.com/wkdehdlr/TIL/blob/main/%EB%A6%AC%EB%88%85%EC%8A%A4%20%EB%AA%85%EB%A0%B9%EC%96%B4%26%EC%89%98%20%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8.md)
 
 #### 웹
 - [GSLB](https://github.com/wkdehdlr/tips/blob/main/GSLB.md)
