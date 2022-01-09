@@ -103,4 +103,167 @@ public interface HandlerInterceptor {
 - commit
   - https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/a3f3e81b5bafdbe9e8296e3479b6215cf55f7355
   - https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/696bad51ec265ade85e00c3e63bb5adc0e618286
-  
+## 예외 처리와 오류 페이지
+### 서블릿 예외 처리 방식 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/3ba831ab3814d45b7ade933d41496e5ecfc7d46b)
+### `Exception`
+  ```java
+WAS(여기까지 전파) <- 필터 <- 서블릿 <- 인터셉터 <- 컨트롤러(예외발생)
+```
+### `response.sendError(HTTP 상태 코드, 오류 메시지)`
+```java
+WAS(sendError 호출 기록 확인) <- 필터 <- 서블릿 <- 인터셉터 <- 컨트롤러(response.sendError())
+```
+- 호출한다고 당장 예외가 발생하는게 아니라, 서블릿 컨테이너에게 오류가 발생했음을 전달
+- 서블릿 컨테이너는 응답 전에 response에 sendError를 확인하고, 존재하면 설정에 따라 오류 페이지를 보여준다
+### 기본 오류 페이지
+> 스프링 기본 예외페이지를 끄고 실행하면 WAS(여기선 부트니까 톰캣) 에러페이지로 응답이 온다
+```properties
+server.error.whitelabel.enabled=false
+```
+### 오류 페이지 추가 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/c177f3700233ac5dc11fd18503d88db8c0809def)
+- 과거에는 `web.xml`에 등록해서 사용
+```xml
+<web-app>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/error-page/400.html</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error-page/500.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.RuntimeException</exception-type>
+    <location>/error-page/500.html</location>
+  </error-page>
+</web-app>
+```
+- 커스터마이징하게 오류페이지 등록이 가능
+```java
+@Component
+public class WebServerCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
+
+    @Override
+    public void customize(ConfigurableWebServerFactory factory) {
+
+        ErrorPage errorPage404 = new ErrorPage(HttpStatus.NOT_FOUND, "/error-page/400");
+        ErrorPage errorPage500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error-page/500");
+        ErrorPage errorPageEx = new ErrorPage(RuntimeException.class, "/error-page/500");
+
+        factory.addErrorPages(errorPage404, errorPage500, errorPageEx);
+    }
+}
+```
+### 오류 페이지 작동 원리
+> WAS는 오류 페이지를 출력하기 위해 설정한 정보로 다시 요청한다 -> 이때 필터, 인터셉터도 모두 다시 통과한다(설정필요)<br>
+> **서버 내부에서 요청이 다시 시작된다(HTTP 요청이 새로 들어온건 아니다)**
+- 에러 페이지 요청 흐름
+  - 1번 요청은 `dispatchType=REQUEST`
+  - 2번 요청은 `dispatchType=ERROR`
+```
+1. WAS(여기까지 전파) <- 필터 <- 서블릿 <- 인터셉터 <- 컨트롤러
+2. WAS(/error-page/500) 다시 요청 -> 필터 -> 서블릿 -> 인터셉터 -> 컨트롤러(/error-page/500) -> View
+```
+- WAS가 에러 페이지 재요청을 할 때는 오류 정보를 `request`에 담아서(`attribute`) 넘겨준다 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/058c52a8ef18f1e5d5b897489a44d3007c7ba319)
+  - `request.getAttribute(RequestDispatcher.~~~)`
+  - `RequestDispatcher`에 상수로 정의되어 있음
+### 예외 처리 - 필터 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/d664a158967de794eeadf5b0c5a4470997d8e704)
+- 기본값은 `DispatcherType.REQUEST`
+- 설정한 `DispatcherType`에 대해 필터를 통과한다
+  - 아래 예시는 `DispatcherType.REQUEST`, `DispatcherType.ERROR`에 대해 필터 적용
+```java
+filterFilterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);
+```
+### 예외 처리 - 인터셉터 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/832668fe34bc4459f2644365e9175c4ae5901a6d)
+- 경로를 설정
+```java
+.addPathPatterns("/**")
+.excludePathPatterns("/css/**", "/*.ico", "/error");
+```
+### 스프링 부트
+> `BasicErrorController`를 제공<br>
+> 오류 페이지 화면만 `BasicErrorController`에 따라 등록하면 된다<br>
+> 커스터마이징 설정이 기본으로 들어가있음
+- `BasicErrorController`의 처리 순서
+  1. 뷰 템플릿
+     - resources/templates/error/500.html
+     - resources/templates/error/5xx.html
+  2. 정적 리소스(static, public)
+      - resources/static/error/400.html   
+      - resources/static/error/404.html   
+      - resources/static/error/4xx.html   
+  3. 적용 대상이 없을 때 뷰 이름(error)
+      - resources/templates/error.html
+## API 예외 처리
+> HTTP Header `Accept`가 `application/json`이 아니면 기존 HTML 응답이 내려간다 []()
+### 스프링 부트 기본 오류 처리
+> `BasicErrorController`
+- 클라이언트 요청의 Accept 헤더값이 `text/html`이면 `errorHtml()`, 그 외에는 `error()` 호출 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/77e7b18033428d55e1159cf6a5a1463602c6e9b4)
+```java
+@RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
+public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
+    HttpStatus status = getStatus(request);
+    Map<String, Object> model = Collections
+            .unmodifiableMap(getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.TEXT_HTML)));
+    response.setStatus(status.value());
+    ModelAndView modelAndView = resolveErrorView(request, response, status, model);
+    return (modelAndView != null) ? modelAndView : new ModelAndView("error", model);
+}
+
+@RequestMapping
+public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+    HttpStatus status = getStatus(request);
+    if (status == HttpStatus.NO_CONTENT) {
+        return new ResponseEntity<>(status);
+    }
+    Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
+    return new ResponseEntity<>(body, status);
+}
+```
+- `BasicErrorController`는 HTML 화면을 처리할 때 사용하고, API는 `@ExceptionHandler`를 사용하는것을 추천!!
+### HandlerExceptionResolver [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/d5e03cf7a756286439ab81b374937f2d5e58017b)
+- ExceptionResolver로 예외를 해결해도 `postHandle()` 호출은 없다
+```java
+public interface HandlerExceptionResolver {
+	@Nullable
+	ModelAndView resolveException(
+			HttpServletRequest request, HttpServletResponse response, @Nullable Object handler, Exception ex);
+
+}
+```
+- `ModelAndView`를 반환하는 이유는 Exception을 처리해서 정상흐름처럼 변경하는 것이 목적이기 때문
+### 반환 값에 따른 동작 방식
+- `HandlerExceptionResolver`의 반환 값에 따라 `DispatcherServlet` 동작 방식이 다르다
+
+|반환|동작|
+|---|---|
+|빈 ModelAndView|`new ModelAndView()`처럼 빈 ModelAndView를 반환하면 뷰를 렌더링 하지 않고, 정상 흐름으로 서블릿이 리턴|
+|ModelAndView 저장|저장한 정보(View, Model 등)를 바탕으로 뷰를 렌더링|
+|null|다음 `ExceptionHandlerResolver`를 찾아서 실행한다. 처리할 수 있는 ExceptionHandlerResolver가 없으면 기존에 발생한 예외를 서블릿 밖으로 던진다|
+### ExceptionResolver 활용 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/bde9e779194c66aed8028807309d0f0303789bb6)
+- 예외 상태 코드 변환
+    - `response.sendError(xxx)` 호출
+- 뷰 템플릿 처리
+    - `ModelAndView`에 값을 채워서 뷰를 렌더링
+- API 응답 처리
+    - `response.getWriter().println("xxx")` 처럼 HTTP 응답 바디에 직접 데이터를 넣어주는 것도 가능하다
+### 스프링이 제공하는 ExceptionResolver
+- 스프링 부트가 기본으로 제공하는 ExceptionHandler
+    - ExceptionHandlerExceptionResolver
+    - ResponseStatusExceptionResolver
+      - HTTP 상태 코드를 지정
+      - `@ResponseStatus(value = HttpStatus.NOT_FOUND)`
+    - DefaultHandlerExceptionResolver
+- `ResponseStatusExceptionResolver` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/101c0e97d6138958706bf545760780ece6b09b32)
+    - 결국 코드 안에서 `response.sendError()`를 호출한다 > **WAS에서 다시 오류페이지를 내부 요청한다**
+    - `ResponseStatusException`
+        - `@ResponseStatus`는 개발자가 직접 변경할 수 없는 예외에는 적용할 수 없기 때문에 이때는 `ResponseStatusException`을 사용
+- `DefaultHandlerExceptionResolver` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/5e8a624290413ca7d00a05696a51517e610351ae)
+    - 스프링 내부에서 발생하는 스프링 예외를 처리
+    - 대표적으로는 `TypeMissmatchException`
+- `ExceptionHandlerExceptionResolver`
+### @ExceptionHandler [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/316e8a6dd888d3ac827108516ddf9660c9d4224a)
+    - `ExceptionHandlerExceptionResolver`가 `@ExceptionHandler`를 처리한다
+    - 기본으로 제공되는 ExceptionResolver 중에 우선순위가 가장 높다
+### @ControllerAdvice [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/831a730003295b436ee748c52c8677c7da896429)
+
