@@ -266,4 +266,35 @@ public interface HandlerExceptionResolver {
     - `ExceptionHandlerExceptionResolver`가 `@ExceptionHandler`를 처리한다
     - 기본으로 제공되는 ExceptionResolver 중에 우선순위가 가장 높다
 ### @ControllerAdvice [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/831a730003295b436ee748c52c8677c7da896429)
+## 동적 프록시
+### JDK 동적 프록시 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/f0d996ad84f3da5be7e50250a5a6f2b4227c8672)
+> 개발자가 직접 프록시 클래스를 만들지 않아도 된다<br>
+> 이름 그대로 객체를 동적으로 런타임에 개발자 대신 만들어준다
+- InvocationHandler
+```java
+public interface InvocationHandler {
+    Object invoke(Object proxy, Method method, Object[] args) throws Throwable;
+}
+```
+- `주의`
+    - JDK 동적 프록시는 `인터페이스`를 기반으로 프록시를 만들기 때문에 `인터페이스가 필수`다.
+
+![스크린샷 2022-01-29 오후 10 44 53](https://user-images.githubusercontent.com/26949623/151663381-78b89ef7-6a8f-44ea-8906-d8caa8bb91f2.png)
+![스크린샷 2022-01-29 오후 10 06 26](https://user-images.githubusercontent.com/26949623/151662174-ad16f981-6fc9-4b5b-b9f8-82a312b0c19b.png)
+### CGLIB [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/17fd6be0b5f71c97815aef1893aa16f1bdf10dbc)
+> 바이트 코드를 조작해서 동적으로 클래스를 생성<br>
+> `인터페이스가 없어도` 구체 클래스만 가지고 동적 프록시를 만들 수 있다.<br>
+> 스프링 `ProxyFactory`가 이 기술을 편리하게 사용할 수 있도록 도와준다.
+- MethodInterceptor
+```java
+public interface MethodInterceptor extends Callback {
+    Object intercept(Object var1, Method var2, Object[] var3, MethodProxy var4) throws Throwable;
+}
+```
+![스크린샷 2022-01-29 오후 10 43 16](https://user-images.githubusercontent.com/26949623/151663350-736199ec-8522-4fee-b470-0e882db2e441.png)
+![스크린샷 2022-01-29 오후 10 46 04](https://user-images.githubusercontent.com/26949623/151663416-bca739b8-73ef-4caa-a55b-829bf3dc33b2.png)
+- 상속을 사용하기 때문에 제약이 있다.
+    - 부모 클래스의 생성자를 체크해야 한다
+    - 클래스에 `final`이 붙으면 상속이 불가 -> CGLIB에서 예외발생
+    - 메소드에 `final`이 붙으면 해당 메소드 오버라이딩 불가 -> CGLIB 프록시 로직 동작 안함
 
