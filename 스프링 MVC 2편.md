@@ -297,4 +297,49 @@ public interface MethodInterceptor extends Callback {
     - 부모 클래스의 생성자를 체크해야 한다
     - 클래스에 `final`이 붙으면 상속이 불가 -> CGLIB에서 예외발생
     - 메소드에 `final`이 붙으면 해당 메소드 오버라이딩 불가 -> CGLIB 프록시 로직 동작 안함
+## 스프링 프록시
+### 프록시 팩토리 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/655d245f5ad919491cc8f450138a4853ec08a572)
+> 스프링은 동적 프록시를 통합해서 편리하게 만들어주는 `ProxyFactory`를 제공한다<br>
+> 프록시 팩토리는 인터페이스가 있으면 JDK 동적 프록시를 사용하고<br>
+> 구체 클래스만 있다면 CGLIB를 사용한다.<br>
+> 이 설정은 변경 가능하다.
 
+```java
+package org.aopalliance.intercept;
+
+public interface MethodInterceptor extends Interceptor {
+
+  Object invoke(@Nonnull MethodInvocation invocation) throws Throwable;
+
+}
+```
+![스크린샷 2022-01-30 오후 10 58 25](https://user-images.githubusercontent.com/26949623/151702789-e2aee93f-a089-4d26-98f4-bede52c965c0.png)
+![스크린샷 2022-01-30 오후 11 02 52](https://user-images.githubusercontent.com/26949623/151703039-b4e2b98b-de1c-4e07-92ab-2766a71c891e.png)
+
+- `Advice`
+    - 프록시 로직
+    - 개발자는 JDK 동적 프록시를 위한 InvocationHandler와 CGLIB를 위한 MethodInterceptor를 따로 만들 필요없이<br>
+    `Advice`만 만들면 된다.
+    - CGLIB의 MethodInterceptor와 이름이 같으니 패키지명에 주의!!!
+      
+
+- `Pointcut` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/3f1cd08209aaeaaeb03764bebf36edc1044d2814)
+    - 필터링 로직
+    - 특정 조건에 맞을 때 프록시를 적용하는 기능
+  
+      |이름|설명|
+      |---|---|
+      |NameMatchMethodPointcut|메소드 이름을 기반으로 매칭|
+      |TruePointcut|항상 참을 반환|
+      |AnnotationMatchingPointcut|어노테이션으로 매칭|
+      |AspectJExpressionPointcut|aspectJ 표현식으로 매칭(가장 중요)|
+- `Advisor` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/6c46bd9a44c2ae8ce2358f179b2b23bfb0b16029)
+    - pointcut 1 + advice 1
+
+![스크린샷 2022-01-31 오전 12 07 42](https://user-images.githubusercontent.com/26949623/151705303-8fc58cfe-1fca-4b30-a09c-1d6bcdb96233.png)
+![스크린샷 2022-01-31 오전 12 01 41](https://user-images.githubusercontent.com/26949623/151705095-d1122706-b35e-4e6d-9433-636e4ce0a042.png)
+
+- 중요
+> AOP를 처음 공부하거나 사용하면, AOP 적용 수 만큼 프록시가 생성된다고 착각할 수 있다<br>
+> 스프링은 AOP를 적용할 때 최적화를 진행해서 프록시는 하나만 만들고, 하나의 프록시에 여러 advisor를 적용한다<br>
+> 하나의 target에 여러 AOP가 동시에 적용되어도, 스프링의 AOP는 하나의 프록시만 생성한다
