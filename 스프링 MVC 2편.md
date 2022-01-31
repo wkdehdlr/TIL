@@ -326,7 +326,10 @@ public interface MethodInterceptor extends Interceptor {
 - `Pointcut` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/3f1cd08209aaeaaeb03764bebf36edc1044d2814)
     - 필터링 로직
     - 특정 조건에 맞을 때 프록시를 적용하는 기능
-  
+    - 포인트컷은 두 곳에 사용
+        - 프록시 적용 대상 여부를 체크해서 필요한 곳에만 프록시 적용(빈 후처리기)
+        - 프록시의 어떤 메소드가 호출 되었을 때 어드바이스를 적용할 지 판단(프록시 내부)
+        
       |이름|설명|
       |---|---|
       |NameMatchMethodPointcut|메소드 이름을 기반으로 매칭|
@@ -343,3 +346,63 @@ public interface MethodInterceptor extends Interceptor {
 > AOP를 처음 공부하거나 사용하면, AOP 적용 수 만큼 프록시가 생성된다고 착각할 수 있다<br>
 > 스프링은 AOP를 적용할 때 최적화를 진행해서 프록시는 하나만 만들고, 하나의 프록시에 여러 advisor를 적용한다<br>
 > 하나의 target에 여러 AOP가 동시에 적용되어도, 스프링의 AOP는 하나의 프록시만 생성한다
+## 빈 후처리기 - BeanPostProcessor
+> 스프링이 컨테이너에 등록할 목적으로 생성한 객체를 컨테이너에 등록하기 직전에 조작한다.
+
+```java
+public interface BeanPostProcessor {
+	@Nullable
+	default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		return bean;
+	}
+
+	@Nullable
+	default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		return bean;
+	}
+}
+```
+- [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/ee7225783a39fc988201e00a1fcde235605043a4)
+
+![스크린샷 2022-01-31 오후 8 42 19](https://user-images.githubusercontent.com/26949623/151788431-0b8bebbe-f89b-4769-bf1a-8ab0a496f53c.png)
+- [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/19e59c44861e5ceedd2665d341d442cca020a11e)
+
+![스크린샷 2022-01-31 오후 8 43 18](https://user-images.githubusercontent.com/26949623/151788443-025edfd5-e168-40f9-839e-5c327154f265.png)
+
+- 참고 `@PostConstruct`
+    - 빈 생성 이후에 빈을 초기화하는 역할을 한다.
+- 빈 후처리기를 통해서 실제 객체 대신 프록시를 빈으로 등록
+![스크린샷 2022-01-31 오후 9 21 10](https://user-images.githubusercontent.com/26949623/151793069-96b55132-a11a-4e02-9132-43d41752fdc4.png)
+### 스프링이 제공하는 빈 후처리기
+```groovy
+implementation 'org.springframework.boot:spring-boot-starter-aop'
+```
+> 이 라이브러리를 추가하면 `aspectjweaver`라는 `aspectJ`관련 라이브러리를 등록하고<br>
+> 스프링 부트가 AOP 관련 클래스를 자동으로 스프링 빈에 등록한다.<br>
+> 스프링 부트가 없던 시절에는 `@EnableAspectJAutoProxy`를 직접 사용해야 했는데, 이 부분을 부트가 자동으로 처리해준다.<br>
+> 우리는 `Advisor`만 빈으로 등록하면 된다.
+### 자동 프록시 생성기 - AutoProxyCreator
+- 스프링 부트 자동 설정으로 `AnnotationAwareAspectJAutoProxyCreator`라는 빈 후처리기가 스프링 빈으로 등록된다.
+  
+![스크린샷 2022-01-31 오후 9 55 02](https://user-images.githubusercontent.com/26949623/151797187-9f30d17c-6e4c-43ee-9696-f433c1317dd0.png)
+- 포인트컷은 2가지에 사용된다
+    - 생성단계 - 프록시 적용 여부 판단 
+        - 자동 프록시 생성기는 포인트컷을 사용해서 해당 빈이 프록시를 생성할 필요가 있는지 없는지 체크한다
+    - 사용 단계 - 어드바이스 적용 여부 판단
+        - 프록시가 호출되었을 때 부가 기능인 어드바이스를 적용할지 말지 포인트컷을 보고 판단한다.
+### AspectJExpressionPointcut
+## @Aspect AOP
+> 스프링은 `@Aspect` 어노테이션으로 매우 편리하게 포인트컷과 어드바이스로 구성되어 있는 어드바이저 생성을 지원한다<br>
+> 자동 프록시 생성기가 @Aspect를 보고 Advisor로 변환해서 저장한다.
+
+![스크린샷 2022-01-31 오후 10 29 04](https://user-images.githubusercontent.com/26949623/151802129-98708219-7d0a-4de6-b1ef-1931692cd39a.png)
+![스크린샷 2022-01-31 오후 10 31 50](https://user-images.githubusercontent.com/26949623/151803114-fadcbbc7-f36f-4593-8221-6d6ffd10d734.png)
+
+- @Aspect
+    - 어노테이션 기반 프록시를 적용할 때 필요
+- @Around
+- ProceedingJoinPoint
+    - Advice의 MethodInvocation과 유사한 기능
+- joinPoint.proceed()
+    - target을 호출
+
