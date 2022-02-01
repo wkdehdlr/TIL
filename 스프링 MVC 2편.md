@@ -405,4 +405,100 @@ implementation 'org.springframework.boot:spring-boot-starter-aop'
     - Advice의 MethodInvocation과 유사한 기능
 - joinPoint.proceed()
     - target을 호출
+## 스프링 AOP 개념
+> AOP는 OOP를 대체하기 위한 것이 아니라 횡단 관심사를 깔끔하게 처리하기 어려운 OOP의 부족한 부분을 보조하는 목적<br>
+> AOP를 사용하면 핵심 기능과 부가 기능이 코드상 완전히 분리되어서 관리된다
 
+![스크린샷 2022-02-01 오후 5 30 27](https://user-images.githubusercontent.com/26949623/151935684-dfd61129-1876-4ae2-ba34-417995550578.png)
+### AOP 적용 방식
+- 컴파일 시점
+  ![스크린샷 2022-02-01 오후 5 33 14](https://user-images.githubusercontent.com/26949623/151936005-c14f931d-06dd-4b08-82a6-17282ce5ff87.png)
+  - 단점 : 특별한 컴파일러(AspectJ 컴파일러)가 필요하고 복잡하다.
+- 클래스 로딩 시점
+  ![스크린샷 2022-02-01 오후 5 35 13](https://user-images.githubusercontent.com/26949623/151936329-01ee3bb0-b8be-425e-9715-0000cbf7f258.png)
+  - `java Instrumentation`
+  - 수 많은 모니터링 툴들이 이 방식을 사용
+  - 로드 타임 위빙
+  - 단점 : 자바를 실행할 때 특별한 옵션(`java -javaagent`)을 통해 클래스 로더 조작기를 지정해야 한다.
+- 런타임 시점(프록시) > `스프링 AOP가 사용하는 방식`
+  ![스크린샷 2022-02-01 오후 5 38 22](https://user-images.githubusercontent.com/26949623/151936725-9989ab31-5587-4258-b9cc-c0cf3ab3ad16.png)
+  - 컴파일도 다 끝나고 클래스 로더에 클래스도 다 올라가고 main이 실행된 다음이다 -> 따라서 컨테이너의 도움과 프록시, DI, 빈 후처리기 같은 개념들을 총 동원해야 한다.
+  - 단점 : 프록시를 사용하기 때문에 일부 제약이 있다. 
+- 스프링 AOP 적용 위치
+    - 스프링 `빈`에만 적용 가능
+    - 메소드 실행 지점에만 적용 가능
+    - 생성자나 static 메소드, 필드 값 접근에는 적용 불가
+- 참고
+> 스프링은 AspectJ의 문법을 차용하고 프록시 방식의 AOP를 적용한다 > AspectJ를 직접 사용하는 것이 아니다.
+### AOP 용어
+- 조인 포인트
+    - 어드바이스가 적용될 수 있는 위치 > 메소드, 생성자, 필드 값 접근, static 메소드 같은 프로그램 실행 중 지점
+    - AOP를 적용할 수 있는 모든 지점
+    - 스프링 AOP는 프록시 방식을 사용하므로 조인 포인트는 항상 `메소드 실행`지점으로 제한
+- 포인트컷
+    - 어드바이스가 적용될 조인 포인트를 선별하는 기능
+    - 스프링 AOP는 메소드 실행 지점만 포인트컷으로 선별 가능
+- 애스펙트(Aspect)
+    - 어드바이스 + 포인트컷을 모듈화
+    - @AspectJ
+- 어드바이저
+    - 하나의 어드바이스와 하나의 포인트컷으로 구성
+- 위빙
+    - 포인트컷으로 결정한 타켓의 조인 포인트에 어드바이스를 적용하는 것
+### 스프링 AOP 구현
+- 포인트컷 분리 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/f8464bb90d0901d219d7f3fbd52ca69961cb8552)
+- 어드바이스 추가 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/9d2a53e3eb46a92019a92bb4872f2a5b1024a78c)
+- 포인트컷 참조 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/148316ec0fe27763f74b1b400dec11b2352d4038)
+- 어드바이스 순서 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/631f67af3d3cee9a6fce79b3e743bb4b308c0e34)
+    - 기본적으로 순서를 보장하지 않는다
+    - Aspect 별로 클래스 분리
+- 어드바이스 종류 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/5d708d562206cff0e56bd8e7c56e298c1cf85a9e)
+
+    |이름|설명|
+    |---|---|
+    |`@Around`|메소드 호출 전후에 수행, 가장 강력한 어드바이스|
+    |`@Before`|조인 포인트 실행 이전에 실행|
+    |`@AfterReturning`|조인 포인트가 정상 완료 후 실행|
+    |`@AfterThrowing`|메소드가 예외를 던지는 경우 실행|
+    |`@After`|조인 포인트가 정상 또는 예외에 관계 없이 실행(finally)|
+## 스프링 AOP - 포인트컷 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/38ab0b3d22ade4862ce47266d9ab0553fcf97853)
+### 포인트컷 지시자
+|이름|설명|
+|---|---|
+|`execution`|메소드 실행 조인 포인트를 매칭한다|
+|`within`|특정 타입 내의 조인 포인트를 매칭한다|
+|`args`|인자가 주어진 타입의 인스턴스인 조인 포인트|
+|`this`|스프링 빈 객체(스프링 AOP 프록시)를 대상으로 하는 조인 포인트|
+|`target`|Target 객체(스프링 AOP 프록시가 가르키는 실제 대상)를 대상으로 하는 조인 포인트|
+|`@target`|실행 객체의 클래스에 주어진 타입 어노테이션이 있는 조인 포인트|
+|`@within`|주어진 어노테이션이 있는 타입 내 조인 포인트|
+|`@annotation`|메소드가 주어진 어노테이션을 가지고 있는 조인 포인트를 매칭|
+|`@args`|전달된 실제 인수의 런타임 타입이 주어진 타입의 어노테이션을 갖는 조인 포인트|
+|`bean`|스프링 전용 포인트컷 지시자, 빈의 이름으로 포인트컷을 지정|
+### `execution` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/f4aa9d92a06361415ab3f772b1fa76aa94c3bada)
+```
+execution(접근제어자? 반환타입 선업타입?메소드이름(파라미터) 예외?)
+```
+- `?`는 생략가능
+- `*` 같은 패턴 지정 가능
+    - 파라미터 `(..)` -> 파라미터의 타입과 파라미터 수가 상관없다
+- `.` : 정확하게 해당 패키지
+- `..` : 해당 위치 패키지 및 하위 패키지 포함
+- 부모타입허용 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/a6892ba71f489a091fff930f0a8439899add93f2)
+- 부모 타입에 있는 메소드만 허용 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/0ed4e86291a5165e15ce5f3963c2eb7a19b7438e)
+- 파라미터매칭 [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/a0064ec361eb50e04a2d78ea3ddd612bfb4bbb1c)
+
+    |표현|설명|
+    |---|---|
+    |`(String)`|정확하게 String 타입 파라미터|
+    |`()`|파라미터가 없어야 한다|
+    |`(*)`|정확히 하나의 파라미터, 단 모든 타입 허용|
+    |`(*, *)`|정확히 두 개의 파라미터, 단 모든 타입 허용|
+    |`(..)`|개수와 무관하게 모든 파라미터, 모든 타입 허용|
+    |`(String, ..)`|String 타입으로 시작해야 한다. 개수와 무관하게 모든 파라미터, 모든 타입 허용|
+### `within` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/78864fe87f83162c9a527031bbf1d4ec48c038de)
+> 해당 타입에 매칭되면 그 안의 메소드들이 자동으로 매칭
+- 표현식에 부모 타입을 사용하면 안된다(execution과 차이)
+### `args` [commit](https://github.com/wkdehdlr/wkdehdlr-spring-mvc-2/commit/08e5ab2005f0ca0b9feadd2a5bf11671b81322ce)
+- args는 부모타입허용
+- execution은 부모타입불가
