@@ -34,6 +34,7 @@
 #### 객체지향
 - [NEXTSTEP]()
 - [개발자가 반드시 정복해야 할 객체지향과 디자인패턴](https://github.com/wkdehdlr/TIL/blob/main/%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80%20%EB%B0%98%EB%93%9C%EC%8B%9C%20%EC%A0%95%EB%B3%B5%ED%95%B4%EC%95%BC%20%ED%95%A0%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EA%B3%BC%20%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4.md)
+- [리팩토링](https://github.com/wkdehdlr/TIL/blob/main/%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81.md)
 
 #### 리눅스
 - [shell script](https://github.com/wkdehdlr/TIL/blob/main/shell%20script.md)
