@@ -38,7 +38,7 @@
 - [리팩토링](https://github.com/wkdehdlr/TIL/blob/main/%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81.md)
 
 #### 카프카
-- [[아파치 카프카 애플리케이션 프로그래밍] 개념부터 컨슈머, 프로듀서, 커넥트, 스트림즈까지!]()
+- [[아파치 카프카 애플리케이션 프로그래밍] 개념부터 컨슈머, 프로듀서, 커넥트, 스트림즈까지!](https://github.com/wkdehdlr/TIL/blob/main/%5B%EC%95%84%ED%8C%8C%EC%B9%98%20%EC%B9%B4%ED%94%84%EC%B9%B4%20%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%5D%20%EA%B0%9C%EB%85%90%EB%B6%80%ED%84%B0%20%EC%BB%A8%EC%8A%88%EB%A8%B8%2C%20%ED%94%84%EB%A1%9C%EB%93%80%EC%84%9C%2C%20%EC%BB%A4%EB%84%A5%ED%8A%B8%2C%20%EC%8A%A4%ED%8A%B8%EB%A6%BC%EC%A6%88%EA%B9%8C%EC%A7%80!.md)
 #### 리눅스
 - [shell script](https://github.com/wkdehdlr/TIL/blob/main/shell%20script.md)
 - [curl](https://github.com/wkdehdlr/TIL/blob/main/curl.md)
